@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>质量年报 · 雷达图评估体系</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'PingFang SC','Segoe UI',Arial,sans-serif; background:#F4F3EE; color:#1A1B1C; line-height:1.6; }
+  .wrap { max-width:880px; margin:0 auto; padding:24px 16px 60px; }
+  .head { padding:24px; border-radius:16px; background:linear-gradient(135deg,#9BBBF4,#C9A7E8); color:#1A1B1C; margin-bottom:20px; }
+  .head h1 { font-size:22px; font-weight:700; }
+  .head .sub { font-size:13px; margin-top:6px; opacity:0.85; }
+  .head .meta { font-size:12px; margin-top:10px; opacity:0.75; }
+  .notice { background:rgba(250,173,20,0.10); border:1px solid #FAAD14; border-radius:12px; padding:12px 16px; margin-bottom:18px; font-size:13px; color:#374151; }
+  .notice b { color:#7A4E00; }
+  .nav { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
+  .nav a { display:inline-block; padding:6px 12px; border-radius:999px; background:#FFFFFF; border:1px solid #E4E3DD; font-size:12.5px; color:#374151; text-decoration:none; }
+  section { margin-bottom:30px; }
+  .sec-title { font-size:17px; font-weight:700; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
+  .sec-title .num { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#9BBBF4; color:#1A1B1C; font-size:13px; font-weight:700; flex:0 0 26px; }
+  .sec-desc { font-size:12.5px; color:#6B7280; margin-bottom:12px; }
+  .card { background:#FFFFFF; border:1px solid #E4E3DD; border-radius:12px; padding:14px 16px; margin-bottom:10px; }
+  .tag { display:inline-block; font-size:11px; padding:2px 8px; border-radius:999px; margin-left:6px; vertical-align:2px; font-weight:500; }
+  .tag-blue { background:rgba(155,187,244,0.2); color:#33508F; }
+  .tag-green { background:rgba(82,196,26,0.14); color:#2E7D32; }
+  .tag-orange { background:rgba(250,173,20,0.2); color:#7A4E00; }
+  .tag-purple { background:rgba(201,167,232,0.3); color:#4B2E63; }
+  .tag-red { background:rgba(234,102,104,0.14); color:#A62D30; }
+  h3 { font-size:14.5px; font-weight:600; margin-bottom:4px; }
+  p, li { font-size:13px; color:#374151; }
+  ul, ol { padding-left:20px; }
+  li { margin:3px 0; }
+  .tbl { width:100%; border-collapse:collapse; font-size:12.5px; background:#FFF; border-radius:12px; overflow:hidden; }
+  .tbl th { background:#F0EEF7; text-align:left; padding:8px 10px; font-weight:600; font-size:12px; color:#1A1B1C; border-bottom:1px solid #E4E3DD; }
+  .tbl td { padding:8px 10px; border-bottom:1px solid #F0EFEA; vertical-align:top; color:#374151; }
+  .tbl tr:last-child td { border-bottom:none; }
+  .chart-box { background:#FFF; border:1px solid #E4E3DD; border-radius:12px; padding:10px 12px; margin-bottom:10px; }
+  .chart-box .ctrl { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+  .chart-box .ctrl select { padding:6px 10px; border:1px solid #E4E3DD; border-radius:8px; font-size:13px; background:#FFF; color:#1A1B1C; }
+  #radar { width:100%; height:380px; }
+  .hl { background:rgba(250,173,20,0.12); padding:2px 5px; border-radius:4px; font-weight:600; color:#7A4E00; }
+  .foot { margin-top:32px; text-align:center; font-size:12px; color:#9CA3AF; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <h1>质量年报 · 雷达图评估体系</h1>
+    <div class="sub">把「写得好不好」从说不出口的主观判断，变成每环节可度量的雷达图 —— 整体一张 + 每环节一张</div>
+    <div class="meta">v1.0 · 2026-10-14 · 维度定义基于：省合规评分表（Q4）+ 李晴审美经验（Q3/Q8）+ 工程队环节设计</div>
+  </div>
+
+  <div class="notice">
+    <b>这个假设成立，而且是最关键的一步。</b>
+    Q4 说质量=专家主观、说不出口——雷达图就是把说不出口的部分<b>翻译成说得出口的维度</b>：
+    每个维度可打分、可对比、可定位短板。整体雷达图回答「这单年报质量如何」，
+    环节雷达图回答「是哪一环拖了后腿」——凹进去的环 = 调参对象，这正是「逐环调参」的依据。
+    <b>注意：下图评分为示例结构（非真实结果），真实评分在端到端跑完后填入。</b>
+  </div>
+
+  <div class="nav">
+    <a href="#radar-sec">① 雷达图总览（可切换示例）</a>
+    <a href="#dims">② 维度定义表</a>
+    <a href="#source">③ 评分来源</a>
+    <a href="#loop">④ 优化闭环</a>
+  </div>
+
+  <!-- 一、雷达图总览 -->
+  <section id="radar-sec">
+    <div class="sec-title"><span class="num">1</span>雷达图总览 <span class="tag tag-orange">示例数据</span></div>
+    <div class="sec-desc">切换查看「整体」或某个环节的雷达图。评分 0-100，越靠外越好。示例数据仅为展示结构。</div>
+
+    <div class="chart-box">
+      <div class="ctrl">
+        <select id="radar-select">
+          <option value="overall">整体 · 年报质量</option>
+          <option value="r1">第1轮 · 资料归整员</option>
+          <option value="r2">第2轮 · 目录规划师</option>
+          <option value="r3">第3轮 · 素材归类员</option>
+          <option value="r4">第4轮 · 数据核对员</option>
+          <option value="r5">第5轮 · 案例整理员</option>
+          <option value="r6">第6轮 · 段落撰写员</option>
+          <option value="r7">第7轮 · 终稿质检员</option>
+        </select>
+        <span style="font-size:12px;color:#6B7280;align-self:center;">当前显示：<span id="radar-title">整体 · 年报质量</span></span>
+      </div>
+      <div id="radar" style="width:100%;height:400px;min-width:0;"></div>
+      <div id="radar-fallback" style="display:none;padding:14px;color:#6B7280;font-size:13px;">图表库加载失败，请直接看下方「维度定义表」。</div>
+    </div>
+  </section>
+
+  <!-- 二、维度定义 -->
+  <section id="dims">
+    <div class="sec-title"><span class="num">2</span>维度定义表</div>
+    <div class="sec-desc">每个维度都有明确含义和打分依据（来源见第③节）</div>
+
+    <div class="card">
+      <h3>整体雷达图 · 8 维 <span class="tag tag-purple">回答「这单年报行不行」</span></h3>
+      <table class="tbl" style="margin-top:8px;">
+        <tr><th style="width:110px;">维度</th><th>含义</th><th style="width:130px;">主要来源</th></tr>
+        <tr><td>合规达标</td><td>省评分表 11 类检查项通过率（封面封底/声明/目录/前言/第三人称/框架/数据标注/案例/图片…）</td><td>规则自动（Q4 合规表）</td></tr>
+        <tr><td>结构完整</td><td>规定版块全覆盖、目录层级规范、图/表/案例目录齐全</td><td>规则自动</td></tr>
+        <tr><td>数据可信</td><td>校验通过：同指标无冲突、口径一致（冲突数/总量）</td><td>第4轮核对员</td></tr>
+        <tr><td>溯源覆盖</td><td>数字/论断可反查原始素材的比例（cite 覆盖率）</td><td>规则自动</td></tr>
+        <tr><td>证据充分</td><td>每论断有出处、案例数量达标、非空话套话</td><td>AI 交叉 + 人工</td></tr>
+        <tr><td>语言规范</td><td>第三人称、政策用语、术语一致、无第一人称残留</td><td>规则自动（合规 6.0）</td></tr>
+        <tr><td>风格贴合</td><td>对照 7 份优质年报的写作范式贴合度</td><td>对照优质样本</td></tr>
+        <tr><td>版块均衡</td><td>各版块体量均衡、无头重脚轻（合规 8.0）</td><td>规则自动</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>环节雷达图 · 7 组 <span class="tag tag-blue">回答「哪一环拖后腿」</span></h3>
+      <table class="tbl" style="margin-top:8px;">
+        <tr><th style="width:130px;">环节</th><th>维度（括号内为反向计分项）</th></tr>
+        <tr><td>R1 资料归整</td><td>完整率 · 来源标注准确率 · 格式归一率 ·（误删率）</td></tr>
+        <tr><td>R2 目录规划</td><td>政策覆盖度 · 层级规范 · 意图一致率 · 关键词粒度</td></tr>
+        <tr><td>R3 素材归类</td><td>归类准确率 ·（未归类率）·（误归率）· 兜底处理率</td></tr>
+        <tr><td>R4 数据核对</td><td>冲突检出率 ·（误报率）· 口径提示质量 · 覆盖范围</td></tr>
+        <tr><td>R5 案例整理</td><td>真实性 · 结构完整度 · 数量达标率 · 章节契合度</td></tr>
+        <tr><td>R6 段落撰写</td><td>证据支撑度 · 风格贴合度 · 语言规范 ·（返工轮次）</td></tr>
+        <tr><td>R7 终稿质检</td><td>格式合规 · 引用完整 · 术语一致 · 版块均衡</td></tr>
+      </table>
+      <p style="margin-top:8px;font-size:12px;color:#6B7280;">反向计分项（误删/误归/返工等）取「100 - 实际值」，保证雷达图所有维度都是"越大越好"，直观比较。</p>
+    </div>
+  </section>
+
+  <!-- 三、评分来源 -->
+  <section id="source">
+    <div class="sec-title"><span class="num">3</span>评分来源 · 四路交叉</div>
+    <div class="sec-desc">每个维度至少有一个来源，关键维度四路交叉（呼应防幻觉三层验证）</div>
+    <div class="card">
+      <table class="tbl">
+        <tr><th style="width:150px;">来源</th><th>干什么</th><th style="width:150px;">示例维度</th></tr>
+        <tr><td><b>① 规则自动</b></td><td>正则/脚本硬检查：第三人称扫描、目录结构、格式编号、引用断链、体量统计</td><td>合规达标、语言规范、结构完整</td></tr>
+        <tr><td><b>② AI 交叉评分</b></td><td>多个模型对同一段内容独立打分取均值（防单模型偏差），输出评分+理由</td><td>证据充分、案例结构、风格贴合</td></tr>
+        <tr><td><b>③ 对照优质样本</b></td><td>与 7 份优秀年报同环节比对（RAG 相似度 + 结构对照），算"贴合基准线"</td><td>风格贴合、段落结构</td></tr>
+        <tr><td><b>④ 人工评分</b></td><td>李晴终审时按质量清单勾选打分（快速 1-5 分制）——最终权威</td><td>整体印象、政策用语、学校风格</td></tr>
+      </table>
+      <p style="margin-top:8px;font-size:12px;color:#6B7280;">规则冲突时：规则自动为准（合规硬项）；规则与 AI 冲突 → 以规则/原始资料为准（呼应"以人工资料为准"原则）。</p>
+    </div>
+  </section>
+
+  <!-- 四、优化闭环 -->
+  <section id="loop">
+    <div class="sec-title"><span class="num">4</span>优化闭环</div>
+    <div class="sec-desc">雷达图不是摆设，是调参的依据</div>
+    <div class="card">
+      <ol>
+        <li><b>每单跑完自动出图</b>：7 张环节图 + 1 张整体图，附各维度得分明细。</li>
+        <li><b>找凹环</b>：整体图凹进去的维度 → 定位到对应环节（如「风格贴合」低 → 看 R6 段落撰写员）。</li>
+        <li><b>调该环参数</b>：只调那一轮的提示词/阈值/温度/模板，不动其他环节（性格→参数映射）。</li>
+        <li><b>对照看进步</b>：同一维度跨单对比（第 1 单 vs 第 3 单）、跨校对比（本校 vs 优质基准线）。</li>
+        <li><b>沉淀基准</b>：多单累积后，优质年报基准线本身也在进化——雷达图即团队的能力成长图。</li>
+      </ol>
+      <p style="margin-top:8px;background:rgba(250,173,20,0.08);border-left:3px solid #FAAD14;padding:8px 12px;border-radius:6px;font-size:12.5px;">
+        <b>与质量复利公式呼应</b>：每环节 0.95 → 整体才 0.857。雷达图让每个 0.95 看得见——哪环低于 0.9 就先补哪环，别等整体崩了才找原因。
+      </p>
+    </div>
+  </section>
+
+  <div class="foot">质量年报 · 雷达图评估体系 v1.0 · AI 持续维护 · 真实评分待端到端跑完后填入</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script>
+(function(){
+  try {
+    var chart = document.getElementById('radar');
+    var fb = document.getElementById('radar-fallback');
+    var titleEl = document.getElementById('radar-title');
+    if (!chart || typeof echarts === 'undefined') {
+      if (fb) fb.style.display = 'block';
+      return;
+    }
+    var m = echarts.init(chart);
+
+    var DATAS = {
+      overall: { title:'整体 · 年报质量', indicator:['合规达标','结构完整','数据可信','溯源覆盖','证据充分','语言规范','风格贴合','版块均衡'], value:[95,88,90,85,82,92,78,86] },
+      r1: { title:'R1 资料归整员', indicator:['完整率','来源标注准确率','格式归一率','误删率(反)'], value:[96,92,88,98] },
+      r2: { title:'R2 目录规划师', indicator:['政策覆盖度','层级规范','意图一致率','关键词粒度'], value:[90,94,85,82] },
+      r3: { title:'R3 素材归类员', indicator:['归类准确率','未归类率(反)','误归率(反)','兜底处理率'], value:[86,92,90,80] },
+      r4: { title:'R4 数据核对员', indicator:['冲突检出率','误报率(反)','口径提示质量','覆盖范围'], value:[93,88,84,90] },
+      r5: { title:'R5 案例整理员', indicator:['真实性','结构完整度','数量达标率','章节契合度'], value:[97,85,80,83] },
+      r6: { title:'R6 段落撰写员', indicator:['证据支撑度','风格贴合度','语言规范','返工轮次(反)'], value:[84,78,90,88] },
+      r7: { title:'R7 终稿质检员', indicator:['格式合规','引用完整','术语一致','版块均衡'], value:[92,95,90,86] }
+    };
+
+    function render(key) {
+      var d = DATAS[key] || DATAS.overall;
+      titleEl.textContent = d.title;
+      m.setOption({
+        backgroundColor:'transparent',
+        tooltip:{ trigger:'item', confine:true, backgroundColor:'rgba(255,255,255,0.96)', textStyle:{ color:'#333', fontSize:12 } },
+        radar:{
+          indicator: d.indicator.map(function(name){ return { name:name, max:100 }; }),
+          radius:'62%',
+          splitNumber:4,
+          axisName:{ color:'#374151', fontSize:12 },
+          splitArea:{ areaStyle:{ color:['rgba(155,187,244,0.03)','rgba(155,187,244,0.08)'] } },
+          splitLine:{ lineStyle:{ color:'rgba(0,0,0,0.10)' } },
+          axisLine:{ lineStyle:{ color:'rgba(0,0,0,0.12)' } }
+        },
+        series:[{
+          type:'radar',
+          data:[{ value:d.value, name:d.title,
+            areaStyle:{ color:'rgba(155,187,244,0.35)' },
+            lineStyle:{ color:'#5B7FD4', width:2 },
+            itemStyle:{ color:'#5B7FD4' } }]
+        }]
+      });
+    }
+
+    render('overall');
+    var sel = document.getElementById('radar-select');
+    if (sel) {
+      sel.addEventListener('change', function(){ render(sel.value); });
+    }
+    window.addEventListener('resize', function(){ m.resize(); });
+  } catch(e) {
+    var fb2 = document.getElementById('radar-fallback');
+    if (fb2) fb2.style.display = 'block';
+  }
+})();
+</script>
+</body>
+</html>

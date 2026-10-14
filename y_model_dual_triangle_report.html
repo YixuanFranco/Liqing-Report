@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高职质量年报平台 · Y模型×双三角成果报告</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'PingFang SC','Segoe UI',Arial,sans-serif; background:#F4F3EE; color:#1A1B1C; line-height:1.6; }
+  .wrap { max-width:880px; margin:0 auto; padding:24px 16px 60px; }
+  .head { padding:24px; border-radius:16px; background:linear-gradient(135deg,#9BBBF4,#C9A7E8); color:#1A1B1C; margin-bottom:20px; }
+  .head h1 { font-size:22px; font-weight:700; }
+  .head .sub { font-size:13px; margin-top:6px; opacity:0.85; }
+  .head .meta { font-size:12px; margin-top:10px; opacity:0.75; }
+  .notice { background:rgba(250,173,20,0.10); border:1px solid #FAAD14; border-radius:12px; padding:14px 16px; margin-bottom:20px; font-size:13px; color:#374151; }
+  .notice b { color:#7A4E00; }
+  .nav { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
+  .nav a { display:inline-block; padding:6px 12px; border-radius:999px; background:#FFFFFF; border:1px solid #E4E3DD; font-size:12.5px; color:#374151; text-decoration:none; }
+  .nav a:hover { border-color:#9BBBF4; color:#1A1B1C; }
+  section { margin-bottom:30px; }
+  .sec-title { font-size:17px; font-weight:700; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
+  .sec-title .num { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#9BBBF4; color:#1A1B1C; font-size:13px; font-weight:700; flex:0 0 26px; }
+  .sec-desc { font-size:12.5px; color:#6B7280; margin-bottom:12px; }
+  .card { background:#FFFFFF; border:1px solid #E4E3DD; border-radius:12px; padding:14px 16px; margin-bottom:10px; }
+  .tag { display:inline-block; font-size:11px; padding:2px 8px; border-radius:999px; margin-left:6px; vertical-align:2px; font-weight:500; }
+  .tag-blue { background:rgba(155,187,244,0.2); color:#33508F; }
+  .tag-green { background:rgba(82,196,26,0.14); color:#2E7D32; }
+  .tag-orange { background:rgba(250,173,20,0.2); color:#7A4E00; }
+  .tag-purple { background:rgba(201,167,232,0.3); color:#4B2E63; }
+  .tag-red { background:rgba(234,102,104,0.14); color:#A62D30; }
+  h3 { font-size:14.5px; font-weight:600; margin-bottom:4px; }
+  p, li { font-size:13px; color:#374151; }
+  ul, ol { padding-left:20px; }
+  li { margin:3px 0; }
+  .tbl { width:100%; border-collapse:collapse; font-size:12.5px; background:#FFF; border-radius:12px; overflow:hidden; }
+  .tbl th { background:#F0EEF7; text-align:left; padding:8px 10px; font-weight:600; font-size:12px; color:#1A1B1C; border-bottom:1px solid #E4E3DD; }
+  .tbl td { padding:8px 10px; border-bottom:1px solid #F0EFEA; vertical-align:top; color:#374151; }
+  .tbl tr:last-child td { border-bottom:none; }
+  .star { color:#B26A00; font-weight:700; }
+  /* 问题卡片（已答版） */
+  .q { background:#FFFFFF; border:1px solid #E4E3DD; border-radius:12px; padding:14px 16px; margin-bottom:10px; border-left:4px solid #52C41A; }
+  .q .qh { display:flex; align-items:center; gap:8px; margin-bottom:4px; }
+  .q .qnum { flex:0 0 30px; height:30px; border-radius:50%; background:rgba(82,196,26,0.16); color:#2E7D32; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .q .qt { font-size:14px; font-weight:600; }
+  .q .why { font-size:12px; color:#6B7280; margin-top:4px; }
+  .q .who { font-size:11px; padding:1px 8px; border-radius:999px; background:rgba(201,167,232,0.3); color:#4B2E63; font-weight:500; white-space:nowrap; }
+  .answer { margin-top:8px; padding:8px 12px; background:rgba(155,187,244,0.10); border-radius:8px; font-size:13px; color:#1A1B1C; }
+  .answer .al { font-weight:700; color:#33508F; }
+  .impact { margin-top:6px; font-size:12.5px; color:#374151; background:rgba(250,173,20,0.08); border-left:3px solid #FAAD14; padding:6px 10px; border-radius:6px; }
+  .impact b { color:#7A4E00; }
+  .corner { background:#FFF; border:1px solid #E4E3DD; border-radius:12px; padding:12px 14px; margin-bottom:10px; }
+  .corner .ch { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+  .corner .side { font-size:11px; padding:2px 8px; border-radius:999px; font-weight:600; }
+  .side.human { background:rgba(155,187,244,0.2); color:#33508F; }
+  .side.ai { background:rgba(94,205,178,0.2); color:#1E6E5C; }
+  .corner table { width:100%; border-collapse:collapse; font-size:12.5px; margin-top:4px; }
+  .corner td { padding:4px 8px; border-bottom:1px dashed #F0EFEA; vertical-align:top; color:#374151; }
+  .corner tr:last-child td { border-bottom:none; }
+  .corner td.k { width:74px; font-weight:600; color:#6B7280; font-size:12px; }
+  .foot { margin-top:32px; text-align:center; font-size:12px; color:#9CA3AF; }
+  .hl { background:rgba(250,173,20,0.12); padding:2px 5px; border-radius:4px; font-weight:600; color:#7A4E00; }
+  .grid { display:flex; gap:10px; flex-wrap:wrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <h1>高职质量年报平台 · Y模型 × 双三角 成果报告</h1>
+    <div class="sub">YiXuan × 李晴 × AI — 关键假设 · 优美解法 · 最佳实践 · 缺口诊断</div>
+    <div class="meta">v2.1 · 2026-10-14 · 素材全部到位：真实素材 33 项 ✓ 优秀案例 7 份 ✓ 合规表已解析 ✓（仅剩字数待查）</div>
+  </div>
+
+  <div class="notice">
+    <b>素材已全部入库，H2 验证随时可启动。</b>
+    李晴交付了三样东西，都已放进 liqing-report：
+    ① <b>质量报告撰写素材</b>（33 项，去年真实学校的部门材料+数据表）→ Q6 兑现；
+    ② <b>优秀报告案例</b>（7 份 2025 年高职年报 PDF）→ Q3 兑现，风格库种子；
+    ③ <b>部分合规性检查评分及反馈表.xls</b>（省专家检查评分表，11 大类检查项已解析）→ Q4 兑现，合规清单种子。
+    唯一待补：年报字数（李晴回头打开文档查）。
+  </div>
+
+  <div class="nav">
+    <a href="#qa">① 李晴已答 · 8 问</a>
+    <a href="#y">② Y 模型过一遍</a>
+    <a href="#dual">③ 双三角过一遍</a>
+    <a href="#solution">④ 优美解法 & 最佳实践</a>
+    <a href="#next">⑤ 下一步验证</a>
+  </div>
+
+  <!-- ══════════ 一、李晴已答 ══════════ -->
+  <section id="qa">
+    <div class="sec-title"><span class="num">1</span>李晴已答 · 8 问（含答案对结论的影响）</div>
+    <div class="sec-desc">全部已回答。每问附「对结论的影响」——报告后面的所有判断都基于这些答案。</div>
+
+    <div class="q">
+      <div class="qh"><div class="qnum">✓</div><div class="qt">Q1 平台卖给谁？</div><span class="tag tag-green">已答</span><span class="who">李晴</span></div>
+      <div class="why">决定产品形态、收费模式和技术取舍</div>
+      <div class="answer"><span class="al">答案：</span>卖给高职/职业本科学校，以<b>教务处名义采购</b>。</div>
+      <div class="impact"><b>影响：</b>产品形态定了 = B2B 合规工具（SaaS 开账号让学校传素材）。对学校卖点是合规+提效+数据可溯源；对李晴是可复制交付 + 多校复利。H1 需求侧基本确认。</div>
+    </div>
+
+    <div class="q">
+      <div class="qh"><div class="qnum">✓</div><div class="qt">Q2 成本基线？</div><span class="tag tag-green">已答</span><span class="who">李晴</span></div>
+      <div class="why">决定 ROI 与定价</div>
+      <div class="answer"><span class="al">答案：</span>素材完整时 <b>2 人 × 5-6 个工作日</b>完成一份；定价约 <b>5 万/份</b>；总页数约 <b>120-150 页</b>；字数待查（李晴回头打开文档看）。</div>
+      <div class="impact"><b>影响：</b>ROI 可算了——现状 10-12 人天/份。若 AI 提效 50-70%，目标 3-6 人天/份或 1 人并行多校。5 万 × 2-3 单即可覆盖平台搭建成本（印证李晴"一校覆盖成本"判断）。<span class="hl">H5 数据化完成。</span></div>
+    </div>
+
+    <div class="q">
+      <div class="qh"><div class="qnum">✓</div><div class="qt">Q3 优质年报样本？</div><span class="tag tag-green">已到位</span><span class="who">李晴</span></div>
+      <div class="why">风格模板库种子 + 审美基准，决定生成质量上限</div>
+      <div class="answer"><span class="al">答案：</span>已交付 <b>7 份 2025 年高职年报 PDF</b>（无锡职业技术大学、南京工业职业技术大学、南京铁道职业技术学院、山东商业职业技术学院、江苏信息职业技术学院、芜湖职业技术大学、安徽审计职业学院），已入库 `优秀报告案例/`。</div>
+      <div class="impact"><b>影响：</b>风格库种子到位。下一步从中提炼"各章节写作范式 + 目录结构对照"，做写手（执笔）的 RAG 语料。</div>
+    </div>
+
+    <div class="q">
+      <div class="qh"><div class="qnum">✓</div><div class="qt">Q4 评审标准？</div><span class="tag tag-green">已到位</span><span class="who">李晴</span></div>
+      <div class="why">生成质量的唯一验收标准</div>
+      <div class="answer"><span class="al">答案：</span>已交付《部分合规性检查评分及反馈表.xls》——省专家检查评分表，<b>11 大类检查项</b>（封面封底/公开网址/真实性责任声明6细则/目录规范/前言3要求/第三人称/框架完整/体量均衡/数据来源标注/典型案例/清晰图片）。质量部分仍为专家主观。</div>
+      <div class="impact"><b>影响：</b>合规清单种子到位——11 类检查项已提取（见库内《合规清单-种子.md》），可做成品控官（校对）的自动化检查规则；质量清单继续靠优质年报+李晴审美。</div>
+    </div>
+
+    <div class="q">
+      <div class="qh"><div class="qnum">✓</div><div class="qt">Q5 数据合规？</div><span class="tag tag-green">已答</span><span class="who">李晴</span></div>
+      <div class="why">决定技术架构（云端 vs 本地）</div>
+      <div class="answer"><span class="al">答案：</span>实际现在帮学校写时，材料到手后就是一小段一小段用大模型处理，<b>等于已经在云端跑了</b>。本地化是跟学校讲的话术，成本高。最终倾向 <b>SaaS 平台开账号让学校传</b>。</div>
+      <div class="impact"><b>影响：</b>技术架构定了 = <b>云端 SaaS</b>，可直接用云端大模型（成本低、上线快），不搞本地部署。AI·基本功角的部署形态问题解除。</div>
+    </div>
+
+    <div class="q">
+      <div class="qh"><div class="qnum">✓</div><div class="qt">Q6 真实素材？</div><span class="tag tag-green">已到位</span><span class="who">李晴</span></div>
+      <div class="why">验证最关键假设 H2（生成质量）</div>
+      <div class="answer"><span class="al">答案：</span>已交付 <b>33 项真实素材</b>（去年年底接的学校）：教务处、发规处财务处、总务处、组织人事处、图文信息中心、继续教育学院 + 6 个二级学院/马院 + 14 张数据表（学生获奖/教师培训/科研/资助等）+ 党建汇报 + 新闻事件汇总，已入库 `质量报告撰写素材/`。</div>
+      <div class="impact"><b>影响：</b>H2 验证材料全部就位（素材=输入，成稿对照=李晴手上）。<span class="hl">注意：素材里同一编号表有多个版本（如学生获奖表 ×2、资助统计 ×3）——正好是校验模块的现成演示案例。</span>可以立即启动端到端 demo。</div>
+    </div>
+
+    <div class="q">
+      <div class="qh"><div class="qnum">✓</div><div class="qt">Q7 校验价值？</div><span class="tag tag-green">已答</span><span class="who">李晴</span></div>
+      <div class="why">决定校验模块是核心卖点还是质量保障组件</div>
+      <div class="answer"><span class="al">答案：</span>不一致<b>不算频繁</b>，但每所学校大概会出现 <b>3-5 次</b>；部门协调差的学校可能 <b>&lt;10 次</b>。</div>
+      <div class="impact"><b>影响：</b>校验 = <b>中等频率的质量保障组件</b>，不是高频核心卖点。但它是"责任界定 + 专业感"的关键差异点（对教务处采购是加分项）。定位调整：核心卖点 = 合规 + 溯源 + 提效，校验是质量保障。</div>
+    </div>
+
+    <div class="q">
+      <div class="qh"><div class="qnum">✓</div><div class="qt">Q8 案例人机边界？</div><span class="tag tag-green">已答</span><span class="who">李晴</span></div>
+      <div class="why">界定人机分工，决定 AI 能省多少事</div>
+      <div class="answer"><span class="al">答案：</span>AI 总结案例大概<b>七成</b>，人工改三成。段落写作：限定词写得好，AI 能到<b>八成九成</b>（之前就是老用 AI 改的）。人工最后过一遍：政策用语、学校风格。</div>
+      <div class="impact"><b>影响：</b>案例边界定了 = AI 初稿 7 成 + 人工润色 3 成。更重要的是：<span class="hl">李晴的实践经验直接支持 H2 乐观预期</span>——她在真实业务里已经把 AI 成段改到 8-9 成，说明生成质量假设在她的工作流里已被验证过。</div>
+    </div>
+  </section>
+
+  <!-- ══════════ 二、Y 模型 ══════════ -->
+  <section id="y">
+    <div class="sec-title"><span class="num">2</span>Y 模型过一遍 <span class="tag tag-blue">Step1→Step4 从下往上</span></div>
+    <div class="sec-desc">已按李晴答案校准（v2.0）</div>
+
+    <div class="card" style="border-left:4px solid #9BBBF4;">
+      <h3>Step 1 · 解决真正问题</h3>
+      <p style="margin-top:6px;"><b>真正问题</b>：<span class="hl">把「质量年报」这项年年重复、政策强制的文书生产，从人肉流水线变成「脉络知识库 + AI 装配 + 人工审定」的 SaaS 交付系统</span>——对学校卖合规+提效+溯源，对李晴实现多校复利、边际成本递减。</p>
+      <p style="margin-top:6px;">本质 = 把行业 Know-how 资产化 + 把服务产品化（2 人 5-6 天/份 → 平台+AI 更快更省）。</p>
+      <p style="margin-top:6px;font-size:12.5px;color:#6B7280;">边界（已确认）：客户=高职/职业本科·教务处采购 · 形态=SaaS · 信息源 100% 校本 · 云端处理 · 只做年报。</p>
+    </div>
+
+    <div class="grid">
+      <div class="card" style="flex:1 1 380px;min-width:0;">
+        <h3>Step 2 · 理解因 <span class="tag tag-purple">我的框架 1–5 条</span></h3>
+        <ol style="margin-top:6px;">
+          <li><b>政策因果</b>：国家→省→校必做，年年重复，需求侧确定性极高（已由采购方确认）</li>
+          <li><b>内容因果</b>：年报 120-150 页，结构化文书 → 脉络可预置、可提炼成模板</li>
+          <li><b>素材因果</b>：约 80% 文字 → 语义可归位；图/表插位置；案例 AI 七成+人工三成</li>
+          <li><b>质量因果</b>：年报是「证明」不是「写」→ 合规清单硬性 + 质量专家主观软性</li>
+          <li><b>生意因果</b>：5 万/份 × 2-3 单覆盖搭建成本 → 多校复利（模板/素材/风格库复用）</li>
+        </ol>
+      </div>
+      <div class="card" style="flex:1 1 380px;min-width:0;">
+        <h3>Step 2 · 理解果 <span class="tag tag-purple">我的目标 TopN</span></h3>
+        <ol style="margin-top:6px;">
+          <li>用去年真实素材跑通端到端，验证 H2（生成质量）——<b>当前最高优先</b></li>
+          <li>把合规方案 + 优质年报变成「风格库 + 合规清单」资产</li>
+          <li>SaaS MVP：素材上传 → 分类 → 成段 → 校验 → 溯源 → 成稿下载</li>
+          <li>跑通第 1 校后复制第 2 校（H6 模板可迁移）</li>
+          <li>单校交付从 10-12 人天降到 3-6 人天（省时 50-70% 目标）</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Step 3 · 理论 ⇄ 事实</h3>
+      <table class="tbl" style="margin-top:6px;">
+        <tr><th style="width:110px;">侧</th><th>内容</th></tr>
+        <tr><td><b>理论（现成模型/规律）</b></td><td>RAG（知识库≠RAG，先建库再谈生成）· 知识管理五阶段 · 防幻觉三库交叉/知识链接四类/三层交叉验证 · AI原生 vs AI+ · 质量复利公式 · 审计/披露逻辑（上市公司年报、ESG 工具类比）· Y模型/双三角</td></tr>
+        <tr><td><b>事实（定性）</b></td><td>政策必做 · 约 80% 文字 · 2 人 5-6 天/份 · 云端已是现状 · 案例 7:3 · 校验每校 3-5 次 · 合规方案分省 · 质量专家主观</td></tr>
+        <tr><td><b>事实（定量）</b></td><td><span class="hl">已确认：</span>定价 5 万/份 · 2 人 × 5-6 工作日 = 10-12 人天 · 总页数 120-150 页 · 一校 3-5 次数据冲突。<span class="hl">待补：</span>字数、章节数、部门数（李晴 Q2 补充）。量尺：省时 50-70%、返工 ≤2 轮（目标值，非实测）。</td></tr>
+        <tr><td><b>自建模型</b></td><td><b>「证据链装配系统」</b>：年报 = 面向评审的证据链文档。证据（素材）→ 按目录装配 → 生成（行文）→ 校验（一致性）→ 溯源（反查）→ 审定（人终审）。不是写作 AI，是装配系统 + 写作助手。</td></tr>
+        <tr><td><b>新假设</b></td><td>见下方 H1–H6</td></tr>
+      </table>
+    </div>
+
+    <div class="card" style="border-left:4px solid #FAAD14;">
+      <h3>关键假设 H1–H6 · 状态更新 <span class="tag tag-red">最关键 = H2</span></h3>
+      <table class="tbl" style="margin-top:6px;">
+        <tr><th style="width:44px;">假设</th><th>内容</th><th style="width:150px;">状态</th></tr>
+        <tr><td><b>H1</b></td><td>需求侧：政策刚需 + 年年重复 → 学校有付费意愿</td><td><span class="tag tag-green">基本确认</span>教务处采购 · 5 万定价有市场</td></tr>
+        <tr><td><b>H2 <span class="star">★</span></b></td><td>生成质量：AI 成段可达「人工改 1-2 轮内可提交」</td><td><span class="tag tag-orange">验证在即</span>材料齐了：去年素材+成稿可跑；李晴实践已见 8-9 成；优质年报种子在路上</td></tr>
+        <tr><td><b>H3</b></td><td>分类准确：语义归类正确率可达可用阈值</td><td><span class="tag tag-blue">待测</span>用去年真实素材小样本测</td></tr>
+        <tr><td><b>H4</b></td><td>校验价值：同指标跨部门不一致被自动标出</td><td><span class="tag tag-green">已明确</span>每校 3-5 次（弱校 &lt;10）→ 质量保障组件定位</td></tr>
+        <tr><td><b>H5</b></td><td>成本经济：一校收入覆盖搭建成本 + 边际递减</td><td><span class="tag tag-green">数据化完成</span>5 万 × 2-3 单覆盖；10-12 人天/份现状</td></tr>
+        <tr><td><b>H6</b></td><td>模板可迁移：目录模板 1 校复制到多校</td><td><span class="tag tag-blue">待第2校</span>跑通第 1 校后验证</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Step 4 · 配套工具（SaaS MVP 模块，按优先级）</h3>
+      <ol style="margin-top:6px;">
+        <li><b>脉络编辑器</b>：目录增删改 + 每层关键词（李晴主场，护城河）</li>
+        <li><b>素材上传 + 语义归类</b>：学校传素材 → 自动归入目录（H3 对应）</li>
+        <li><b>RAG 引擎</b>：校本素材库 + 优质年报风格库（H2 对应，种子=Q3）</li>
+        <li><b>成段生成器</b>：按目录生成 + 引用映射（H2 对应）</li>
+        <li><b>校验引擎</b>：同指标跨素材比对 + 口径提示（H4 对应，每校 3-5 次）</li>
+        <li><b>溯源索引</b>：数字 → 文件 → 部门 → 时间 全链路</li>
+        <li><b>人工审定工作台</b>：改稿 + 批注 + 版本（人终审）</li>
+        <li><b>案例库</b>：AI 初稿 7 成 + 人工润色 3 成（Q8 边界）</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ══════════ 三、双三角 ══════════ -->
+  <section id="dual">
+    <div class="sec-title"><span class="num">3</span>双三角过一遍 <span class="tag tag-green">人类三角 × AI 三角 · 六角诊断</span></div>
+    <div class="sec-desc">v2.0：按李晴答案更新缺口状态</div>
+
+    <div class="corner">
+      <div class="ch"><span class="side human">人类 · 创造力</span><b>理解底层规律 · 解放思想 · 提创造假设</b></div>
+      <table>
+        <tr><td class="k">有什么</td><td>李晴的行业脉络认知；「解放思想 11 扽法」；「证据链装配」假设；H1-H6 假设体系</td></tr>
+        <tr><td class="k">缺什么</td><td>脉络库完整度（写到几级没定）；突破性解法待收敛</td></tr>
+        <tr><td class="k">我能补</td><td>继续扽；把「证据链装配」建模化；设计验证实验</td></tr>
+        <tr><td class="k">需李晴补</td><td>评审偏好、写作潜规则（Q4 合规方案 + Q3 优质年报会带出来）</td></tr>
+      </table>
+    </div>
+
+    <div class="corner">
+      <div class="ch"><span class="side human">人类 · 审美</span><b>专业见识 · 最佳实践 · 评价标准</b></div>
+      <table>
+        <tr><td class="k">有什么</td><td>李晴专业见识；Q4 每省合规方案（可拿）；Q3 优质年报（可给）</td></tr>
+        <tr><td class="k">缺什么</td><td>评价标准待显性化：合规清单（等方案到）+ 质量清单（李晴审美+优质年报基准）</td></tr>
+        <tr><td class="k">我能补</td><td>起草「合规清单 + 质量清单」双层评价模板，等材料到直接填</td></tr>
+        <tr><td class="k">需李晴补</td><td>合规方案（明天）· 优质年报（今天/明天）——已承诺</td></tr>
+      </table>
+    </div>
+
+    <div class="corner">
+      <div class="ch"><span class="side human">人类 · 体系</span><b>科学体系思维 · 假设验证模型 · 稳定知识结构</b></div>
+      <table>
+        <tr><td class="k">有什么</td><td>Y 模型流程；假设清单；共创看板；工程队流水线设计</td></tr>
+        <tr><td class="k">缺什么</td><td>H2 端到端验证还没跑（材料已就位）</td></tr>
+        <tr><td class="k">我能补</td><td>立即用去年素材设计并执行端到端模拟</td></tr>
+        <tr><td class="k">需李晴补</td><td>把去年素材+成稿发我（Q6 已同意）</td></tr>
+      </table>
+    </div>
+
+    <div class="corner">
+      <div class="ch"><span class="side ai">AI · 场景</span><b>业务拆解 · ROI 预判 · AI 打磨 · 组织部署</b></div>
+      <table>
+        <tr><td class="k">有什么</td><td>8 步流程拆解；功能边界三原则；ROI 已可算（2 人 5-6 天、5 万/份）</td></tr>
+        <tr><td class="k">缺什么</td><td>MVP 边界细化；SaaS 账号/权限设计（学校多部门供材场景）</td></tr>
+        <tr><td class="k">我能补</td><td>ROI 测算表；SaaS MVP 功能优先级；多部门协作流程设计</td></tr>
+        <tr><td class="k">需李晴补</td><td>章节数/部门数（Q2 补充）；定价策略细节（5 万是起步？）</td></tr>
+      </table>
+    </div>
+
+    <div class="corner">
+      <div class="ch"><span class="side ai">AI · 基本功</span><b>提示词/智能体 · 多模态工具库 · 模型微调工程化</b></div>
+      <table>
+        <tr><td class="k">有什么</td><td>云端大模型可用（Q5 已确认云端现状）；语义分类/RAG/成段/比对/多模态现成</td></tr>
+        <tr><td class="k">缺什么</td><td>SaaS 工程落地（账号体系、文件存储、权限）——这是写代码阶段的事</td></tr>
+        <tr><td class="k">我能补</td><td>直接跑端到端 demo；提示词/检索策略设计；评估微调必要性（大概率不需要）</td></tr>
+        <tr><td class="k">需李晴补</td><td>无阻塞项</td></tr>
+      </table>
+    </div>
+
+    <div class="corner">
+      <div class="ch"><span class="side ai">AI · 数据</span><b>非结构化 · 结构化 · 形成资产</b></div>
+      <table>
+        <tr><td class="k">有什么</td><td>去年素材+成稿（Q6）· 优质年报（Q3 在路上）· 100% 校本数据</td></tr>
+        <tr><td class="k">缺什么</td><td>风格库种子未入库；资产化机制未定型</td></tr>
+        <tr><td class="k">我能补</td><td>数据四层模型（素材→目录→指标→来源）；溯源方案；风格库构建流程</td></tr>
+        <tr><td class="k">需李晴补</td><td>素材文件发我（Q6）· 优质年报交付（Q3）</td></tr>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top:12px;">
+      <h3>缺口总表 · v2.1 更新 <span class="tag tag-green">绿=已解决</span><span class="tag tag-blue">蓝=待测</span></h3>
+      <table class="tbl" style="margin-top:8px;">
+        <tr><th style="width:60px;">等级</th><th>缺口</th><th style="width:100px;">状态</th></tr>
+        <tr><td><span class="tag tag-green">绿</span></td><td>商业基线：卖给谁（教务处采购）+ 成本（2人5-6天）+ 定价（5万）</td><td>已解决</td></tr>
+        <tr><td><span class="tag tag-green">绿</span></td><td>数据边界：云端 SaaS（Q5）</td><td>已解决</td></tr>
+        <tr><td><span class="tag tag-green">绿</span></td><td>案例边界：AI 七成 + 人工三成（Q8）</td><td>已解决</td></tr>
+        <tr><td><span class="tag tag-green">绿</span></td><td>校验价值：每校 3-5 次（Q7）</td><td>已解决</td></tr>
+        <tr><td><span class="tag tag-green">绿</span></td><td>审美基准：7 份优质年报（风格库种子）+ 合规表 11 类检查项（合规清单种子）</td><td>已到位</td></tr>
+        <tr><td><span class="tag tag-green">绿</span></td><td>真实素材：33 项部门材料 + 14 张数据表（H2/H3 验证材料）</td><td>已到位</td></tr>
+        <tr><td><span class="tag tag-orange">黄</span></td><td>字数/章节数/部门数（Q2 补充）——补全 ROI 细节</td><td>李晴回头查</td></tr>
+        <tr><td><span class="tag tag-blue">蓝</span></td><td>H2 验证：用真实素材跑「素材→分类→成段→校验→溯源」对照成稿</td><td>可立即启动</td></tr>
+        <tr><td><span class="tag tag-blue">蓝</span></td><td>H3 验证：语义分类准确率（用素材小样本测）</td><td>随 H2 一起</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══════════ 四、优美解法 & 最佳实践 ══════════ -->
+  <section id="solution">
+    <div class="sec-title"><span class="num">4</span>优美解法 & 最佳实践</div>
+    <div class="sec-desc">v2.0：结论未变，依然成立</div>
+
+    <div class="card" style="border-left:4px solid #52C41A;">
+      <h3>优美解法（六条）</h3>
+      <ol style="margin-top:6px;">
+        <li><b>不叫「写作平台」，叫「证据链装配系统」</b>——避开「AI 写作质量主观」陷阱，把问题转化为「证据组织」的确定性流程，让校验+溯源成为产品灵魂。</li>
+        <li><b>校验=对账、溯源=cite、终审=人</b>——「只报差异、不判真伪」；责任永远在学校/人。</li>
+        <li><b>风格库 = RAG 语料，不是模型训练</b>——优质年报直接变成检索语料，无需自训模型，冷启动成本极低。</li>
+        <li><b>资产复利</b>——每做一单，目录模板、风格库、案例库、指标字典都在积累。「技术是公器，经验是私产」。</li>
+        <li><b>先跑通再搭台（知行合一）</b>——用去年真实素材跑端到端，验证 H2 后再投入搭 SaaS。</li>
+        <li><b>让 AI 进主循环（AI 原生）</b>——素材一进来就带结构化头部 + 来源标签，校验和溯源从源头就位。</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>最佳实践（知识库可直接借鉴）</h3>
+      <table class="tbl" style="margin-top:6px;">
+        <tr><th style="width:150px;">实践</th><th>内容</th><th>对平台的用法</th></tr>
+        <tr><td>人工介入三节点（半肥猫）</td><td>项目开始 / AI 说完成时 / 结果交付前</td><td>平台流程内置：开始问清目标假设、完成时要 AI 给证据、交付前人终审</td></tr>
+        <tr><td>三库交叉（劉衛）</td><td>实事求是捞事实 / 解放思想捞想法 / 知行合一捞验证过的</td><td>素材库分类逻辑：事实库（数据）、想法库（案例）、验证库（已用过的段落）</td></tr>
+        <tr><td>知识链接四类（劉衛）</td><td>逻辑链 / 因果链 / 反例链 / 案例链</td><td>溯源高级形态：不只数字可溯源，论断可沿链追溯</td></tr>
+        <tr><td>三层交叉验证（郁金星）</td><td>多AI交叉 / 人工+AI交叉 / 资料规则为准</td><td>校验模块多层设计：AI 比对 + 人工复核 + 原始资料为准</td></tr>
+        <tr><td>质量复利公式（半肥猫）</td><td>每步 0.95→整体 0.857</td><td>生成/校验/审定每环都要人控——整体质量=各环质量之积</td></tr>
+        <tr><td>AI原生判词（Truman）</td><td>打补丁 vs 重新设计数据流</td><td>SaaS 数据流：素材入口即结构化，不是给人工服务贴层 AI</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══════════ 五、下一步 ══════════ -->
+  <section id="next">
+    <div class="sec-title"><span class="num">5</span>下一步验证计划 <span class="tag tag-green">素材已齐，可启动</span></div>
+    <div class="sec-desc">H2/H3 验证材料全部就位</div>
+    <div class="card">
+      <ol>
+        <li><b>立即启动：真实素材端到端 demo</b>——用 `质量报告撰写素材/` 跑「素材→分类→成段→校验→溯源」，对照李晴手上的成稿评分，验证 H2/H3。<span class="hl">这是当前唯一重要的事。</span></li>
+        <li><b>风格库入库</b>：从 7 份优秀年报提炼「各章节写作范式 + 目录结构对照」，做写手（执笔）的 RAG 语料。</li>
+        <li><b>合规清单落地</b>：11 类检查项 → 品控官（校对）自动化检查规则（第三人称/数据来源标注/封面封底/声明细则等）。</li>
+        <li><b>等补充：字数/章节数/部门数（Q2）</b>→ 补全 ROI 细节。</li>
+        <li><b>H2 通过后 → 定 SaaS MVP 边界</b>（建议首期：素材上传+归类+RAG成段+人工审定工作台；校验溯源次期）。</li>
+        <li><b>跑通第 1 校 → 验证 H6 模板迁移 → 谈第 2 校</b>。</li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="foot">高职质量年报平台 · Y模型×双三角 成果报告 v2.0 · AI 持续维护 · 待补项到齐后更新至 v2.1</div>
+</div>
+</body>
+</html>

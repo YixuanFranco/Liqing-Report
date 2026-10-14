@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高职质量年报平台 · 共创看板</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'PingFang SC','Segoe UI',Arial,sans-serif; background:#F4F3EE; color:#1A1B1C; line-height:1.6; }
+  .wrap { max-width:860px; margin:0 auto; padding:24px 16px 60px; }
+  /* 顶栏 */
+  .head { padding:24px; border-radius:16px; background:linear-gradient(135deg,#9BBBF4,#C9A7E8); color:#1A1B1C; margin-bottom:20px; }
+  .head h1 { font-size:22px; font-weight:700; }
+  .head .sub { font-size:13px; margin-top:6px; opacity:0.85; }
+  .head .meta { font-size:12px; margin-top:10px; opacity:0.75; }
+  /* 导航 */
+  .nav { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
+  .nav a { display:inline-block; padding:6px 12px; border-radius:999px; background:#FFFFFF; border:1px solid #E4E3DD; font-size:12.5px; color:#374151; text-decoration:none; }
+  .nav a:hover { border-color:#9BBBF4; color:#1A1B1C; }
+  /* 章节 */
+  section { margin-bottom:28px; }
+  .sec-title { font-size:17px; font-weight:700; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
+  .sec-title .num { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#9BBBF4; color:#1A1B1C; font-size:13px; font-weight:700; flex:0 0 26px; }
+  .sec-desc { font-size:12.5px; color:#6B7280; margin-bottom:12px; }
+  .card { background:#FFFFFF; border:1px solid #E4E3DD; border-radius:12px; padding:14px 16px; margin-bottom:10px; }
+  .tag { display:inline-block; font-size:11px; padding:2px 8px; border-radius:999px; margin-left:6px; vertical-align:2px; font-weight:500; }
+  .tag-blue { background:rgba(155,187,244,0.2); color:#33508F; }
+  .tag-green { background:rgba(82,196,26,0.14); color:#2E7D32; }
+  .tag-orange { background:rgba(250,173,20,0.2); color:#7A4E00; }
+  .tag-purple { background:rgba(201,167,232,0.3); color:#4B2E63; }
+  .tag-red { background:rgba(234,102,104,0.14); color:#A62D30; }
+  h3 { font-size:14.5px; font-weight:600; margin-bottom:4px; }
+  p, li { font-size:13px; color:#374151; }
+  ul, ol { padding-left:20px; }
+  li { margin:3px 0; }
+  .flow-step { display:flex; gap:10px; align-items:flex-start; padding:10px 12px; border:1px solid #E4E3DD; border-radius:12px; background:#FFF; margin-bottom:8px; }
+  .flow-step .n { flex:0 0 26px; height:26px; border-radius:50%; background:rgba(155,187,244,0.35); color:#1A1B1C; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .flow-step .b { flex:1; min-width:0; }
+  .flow-step .t { font-size:13.5px; font-weight:600; }
+  .flow-step .d { font-size:12px; color:#374151; margin-top:2px; }
+  .flow-line { width:2px; height:12px; background:#9BBBF4; margin:2px auto; }
+  .grid2 { display:flex; gap:10px; flex-wrap:wrap; }
+  .grid2 > div { flex:1 1 340px; min-width:0; }
+  .tbl { width:100%; border-collapse:collapse; font-size:12.5px; background:#FFF; border-radius:12px; overflow:hidden; }
+  .tbl th { background:#F0EEF7; text-align:left; padding:8px 10px; font-weight:600; font-size:12px; color:#1A1B1C; border-bottom:1px solid #E4E3DD; }
+  .tbl td { padding:8px 10px; border-bottom:1px solid #F0EFEA; vertical-align:top; color:#374151; }
+  .tbl tr:last-child td { border-bottom:none; }
+  .star { color:#B26A00; font-weight:700; }
+  .pending { background:rgba(250,173,20,0.06); border-left:3px solid #FAAD14; padding:10px 12px; border-radius:8px; margin-bottom:8px; font-size:13px; color:#374151; }
+  .pending b { color:#7A4E00; }
+  .todo-item { display:flex; gap:10px; align-items:flex-start; padding:10px 12px; border:1px solid #E4E3DD; border-radius:10px; background:#FFF; margin-bottom:8px; }
+  .todo-item .mark { flex:0 0 18px; height:18px; border:1.5px solid #9BBBF4; border-radius:5px; margin-top:2px; }
+  .todo-item .who { font-size:11px; padding:1px 8px; border-radius:999px; background:rgba(155,187,244,0.2); color:#33508F; font-weight:500; white-space:nowrap; }
+  .todo-item .who.li { background:rgba(201,167,232,0.3); color:#4B2E63; }
+  .foot { margin-top:32px; text-align:center; font-size:12px; color:#9CA3AF; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 顶栏 -->
+  <div class="head">
+    <h1>高职质量年报平台 · 共创看板</h1>
+    <div class="sub">YiXuan × 李晴 × AI 三方协作文档 — 持续更新，随时增补</div>
+    <div class="meta">版本 v0.7 · 更新于 2026-10-14 · 状态：素材全部到位（33 项真实素材 + 7 份优秀案例 + 合规表已解析）· H2 验证可随时启动</div>
+  </div>
+
+  <!-- 导航 -->
+  <div class="nav">
+    <a href="#bg">① 项目背景</a>
+    <a href="#flow">② 平台构想流程</a>
+    <a href="#ymodel">③ Y 模型结构</a>
+    <a href="#insights">④ 解放思想 · 扽法</a>
+    <a href="#dual">⑤ 双三角成果</a>
+    <a href="#open">⑥ 请李晴回答（8问）</a>
+    <a href="#crew">⑦ 工程队假设</a>
+    <a href="#radar-sec">⑧ 雷达图评估</a>
+  </div>
+
+  <!-- 一、背景 -->
+  <section id="bg">
+    <div class="sec-title"><span class="num">1</span>项目背景</div>
+    <div class="sec-desc">为什么会有这个平台想法</div>
+    <div class="card">
+      <ul>
+        <li><b>政策刚需</b>：高职/大专院校每年年底都要写《质量年报》，上交省级教育主管部门，省级汇总后再上交国家——每年必做。</li>
+        <li><b>现状</b>：纯人工服务——收集学校材料 → 人工整理 → 人工撰写 → 反复修改。</li>
+        <li><b>信息源</b>：100% 校本数据（学校提供素材、官网新闻、公众号），无外部数据，给啥信啥，不做可信度校验，只做内部一致性校验。</li>
+        <li><b>商业逻辑</b>：一个学校的项目收入基本可覆盖平台搭建成本；且这是全行业年年重复的刚需。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 二、平台构想流程 -->
+  <section id="flow">
+    <div class="sec-title"><span class="num">2</span>平台构想全流程</div>
+    <div class="sec-desc">紫色 = 后补的核心功能（校验 + 溯源）｜橙色 = 待探讨点</div>
+
+    <div class="flow-step" style="background:linear-gradient(135deg,rgba(155,187,244,0.14),rgba(155,187,244,0.22));">
+      <div class="n">入</div>
+      <div class="b"><div class="t">学校各部门原始材料</div><div class="d">文字约 80%（含大量数字）+ 图片 / 表格 / 案例 · 来源分散在不同部门</div></div>
+    </div>
+    <div class="flow-line"></div>
+    <div class="flow-step">
+      <div class="n">1</div>
+      <div class="b"><div class="t">质量年报脉络库</div><div class="d">平台预置年报三级/四级目录，标注每层关键词与覆盖内容，作为全平台分类骨架</div></div>
+      <span class="tag tag-green">平台侧整理</span>
+    </div>
+    <div class="flow-line"></div>
+    <div class="flow-step">
+      <div class="n">2</div>
+      <div class="b"><div class="t">语义对比 · 自动分类</div><div class="d">文字素材按语义自动归入脉络各章节</div></div>
+      <span class="tag tag-green">已想清</span>
+    </div>
+    <div class="flow-line"></div>
+    <div class="flow-step">
+      <div class="n">3</div>
+      <div class="b"><div class="t">人工调整目录</div><div class="d">用户可增删层级、自定义目录内容，形成本校独有的目录结构</div></div>
+      <span class="tag tag-green">已想清</span>
+    </div>
+    <div class="flow-line" style="background:#C9A7E8;"></div>
+    <div class="flow-step" style="background:rgba(201,167,232,0.08);">
+      <div class="n" style="background:rgba(201,167,232,0.4);">4</div>
+      <div class="b"><div class="t">素材库 · 全程溯源标记</div><div class="d">每段素材自动挂来源标签（提供部门、文件、时间），之后任何环节都可反查原始材料</div></div>
+      <span class="tag tag-purple">本轮补充</span>
+    </div>
+    <div class="flow-line" style="background:#C9A7E8;"></div>
+    <div class="flow-step" style="background:rgba(201,167,232,0.08);">
+      <div class="n" style="background:rgba(201,167,232,0.4);">5</div>
+      <div class="b"><div class="t">数据内部校验</div><div class="d">同类型数据跨素材比对：不同部门报的同一指标数值不一致 → 自动标出并反馈，供找提供部门核实</div></div>
+      <span class="tag tag-purple">本轮补充</span>
+    </div>
+    <div class="flow-line" style="background:#C9A7E8;"></div>
+    <div class="flow-step" style="background:rgba(250,173,20,0.07);">
+      <div class="n" style="background:rgba(250,173,20,0.35);">6</div>
+      <div class="b"><div class="t">AI 整理成段（保留引用）</div><div class="d">每个目录下多条素材 → 整理成规范段落；每个关键数字/结论保留引用映射，可点回原始素材（类似论文引用）</div></div>
+      <span class="tag tag-orange">待探讨 · 是否引入大模型</span>
+    </div>
+    <div class="flow-line" style="background:#F0B45A;"></div>
+    <div class="flow-step" style="background:rgba(250,173,20,0.07);">
+      <div class="n" style="background:rgba(250,173,20,0.35);">7</div>
+      <div class="b"><div class="t">参考模板库（检索范例）</div><div class="d">收录往届优质年报：写某节时自动检索「别人在这节怎么组织、什么风格」，作为生成参考（RAG 检索增强，非自训模型）</div></div>
+      <span class="tag tag-orange">待探讨 · 如何组织</span>
+    </div>
+    <div class="flow-line"></div>
+    <div class="flow-step">
+      <div class="n">8</div>
+      <div class="b"><div class="t">报告初稿 → 二次调整</div><div class="d">输出整篇报告样式，可在线调整或下载后人工修改，所有数字可反查来源</div></div>
+      <span class="tag tag-green">已想清</span>
+    </div>
+
+    <div class="card" style="margin-top:12px;">
+      <h3>三个功能边界（已和李晴对齐）</h3>
+      <table class="tbl" style="margin-top:8px;">
+        <tr><th>功能</th><th>干的事</th><th>不干的事</th></tr>
+        <tr><td><b>溯源（cite）</b></td><td>每个数字标注来源部门/文件</td><td>不评判数据质量，出问题能撇清责任、定位到人</td></tr>
+        <tr><td><b>校验</b></td><td>发现"同一指标两个数"的矛盾并报告</td><td>不裁决哪个是真的——只报差异，不判谁错</td></tr>
+        <tr><td><b>替换</b></td><td>反馈学校 → 确认真实值 → 替换原素材 → 重新生成</td><td>不自动改数，改哪个数永远由用户拍板</td></tr>
+      </table>
+      <p style="margin-top:8px;font-size:12px;color:#6B7280;">注意：校验≠辨别说谎，是"对账"——平台只报告不一致，真伪裁决权始终在学校/用户手里。盲点提示：同指标不一致往往不是谁错，而是统计口径不同（学年 vs 自然年等），平台应标出"疑似同一指标、口径待确认"。</p>
+    </div>
+  </section>
+
+  <!-- 三、Y模型 -->
+  <section id="ymodel">
+    <div class="sec-title"><span class="num">3</span>Y 模型 · 一堂科学成事道路</div>
+    <div class="sec-desc">来源：YiXuan wiki《如何十倍速学习-IPO+Y模型》《早期技术必修课》等 + 一堂红卡 11 张</div>
+
+    <div class="card">
+      <h3>核心结构（12345 原则）</h3>
+      <ul style="margin-top:6px;">
+        <li><b>1 个核心</b>：因果规律（可证伪、确定性、可复现）</li>
+        <li><b>2 个基本点</b>：理论（归纳）· 事实（演绎）</li>
+        <li><b>3 大必备原则</b>：知行合一 · 实事求是 · 解放思想</li>
+        <li><b>4 种迭代方式</b>：提炼建模 · 科学类比 · 假设驱动 · 定性定量</li>
+        <li><b>5 步推理里程碑（Y-STEPS）</b>：限定范围 → 明确目标 → 1.0 框架 → 预判进步（理论+实践迭代）→ 组织配套（机制+成本）</li>
+        <li><b>关联模型</b>：IPO = Y 模型（Input→Process→Output，加速学习手法）；MECE 不重不漏</li>
+      </ul>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>理论 ← 归纳 <span class="tag tag-blue">一切理论都是归纳</span></h3>
+        <p><b>如何得到 · 提炼建模</b>：搜（知乎/Google/Perplexity）、问（网上/街上/上山下乡）、看书看世界、交叉验证、明确使用前提</p>
+        <p style="margin-top:6px;"><b>如何验证 · 科学类比</b>：科学 = 可复现可证伪；类比 = 内结构相似、看边界（小马过河：我是什么）</p>
+      </div>
+      <div class="card">
+        <h3>事实 ← 演绎 <span class="tag tag-green">一切事实都是演绎</span></h3>
+        <p><b>如何得到 · 假设驱动</b>：大胆假设、写下来（show me your doc）、不断问"还有吗"、防止过早行动</p>
+        <p style="margin-top:6px;"><b>如何验证 · 定性定量</b>：先定性（有反例吗？前提对吗？）→ 再定量（定量永远排在定性后面）</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>三原则定义（校准 YiXuan 记忆）</h3>
+      <ul style="margin-top:6px;">
+        <li><b>知行合一</b>：验证过的认知才是有效的「知」，可复用的规律才是有效的「行」</li>
+        <li><b>实事求是</b>：理解真实的事实（难在定量）→ 基于事实找规律指导行动（难在条件）</li>
+        <li><b>解放思想</b>：找到确定性的底层规律，然后在上层完成突破式创新；思考分表层（经验常识）/中层（方法模型）/底层（本质、关联学科经典）</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 四、解放思想扽法 -->
+  <section id="insights">
+    <div class="sec-title"><span class="num">4</span>解放思想 · 招法 × 平台扽法</div>
+    <div class="sec-desc">把 11 张「科学理念·红卡」逐一往平台问题上扽（发散阶段，未深入调研）</div>
+
+    <table class="tbl">
+      <tr><th style="width:90px;">招法</th><th>卡上要点</th><th>对平台的扽法</th></tr>
+      <tr><td>① 明确问题</td><td>真实·范围清晰·明确·可评估</td><td>先定<b>卖给谁</b>：服务方提效工具 vs 学校合规工具，产品形态完全不同；先建基线指标（人工时长、返工轮次）</td></tr>
+      <tr><td>② 科学笃定</td><td>追求确定性因果规律</td><td>需求侧确定性极高（政策刚需、年年重复、全行业）；不确定全在供给侧（质量、付费）</td></tr>
+      <tr><td>③ 知行合一</td><td>验证过的知才有效</td><td>别先搭平台：用「人+AI」手工模拟完整流程跑 1 所学校，验证再决定做不做</td></tr>
+      <tr><td>④ 实事求是</td><td>实事难在定量、求是难在条件</td><td>先采「实事」基线（年报规格、素材形态、人工耗时）；再列「AI 可用」的条件清单</td></tr>
+      <tr><td>⑤ 解放思想 <span class="star">★</span></td><td>找底层规律→上层突破创新</td><td>底层规律：年报不是"写"是<b>"证明"</b>——面向评审的证据链文档。突破：做<b>证据链装配系统</b>而非 AI 写手，天然承载校验+溯源</td></tr>
+      <tr><td>⑥ 相信规律</td><td>相信常识/基准值/本质/方法论/学科经典</td><td>骨架不用自创：政策文件=目录基准值，披露体系=结构，RAG=技术</td></tr>
+      <tr><td>⑦ 科学类比</td><td>批判思维/交叉类比/内核边界</td><td>最像类比：上市公司年报/ESG 披露工具。反面问题：生成内容被评审识别为模板化怎么办</td></tr>
+      <tr><td>⑧ 提炼建模</td><td>清单小抄→体系框架→底层规律</td><td>护城河 = 提炼出的「年报写作规律模型」（目录×关键词×写作范式×评审要点）</td></tr>
+      <tr><td>⑨ 追求事实</td><td>踩坑案例/统计数字/最佳实践/样本/对标</td><td>冷启动 = 先建事实库：历年公开年报（样本）、评审退回案例（踩坑）、获奖年报（最佳实践）</td></tr>
+      <tr><td>⑩ 定性定量</td><td>单一样本→简单定性→区间定量→精准定量</td><td>「做到什么程度」量尺：先交付简单定性+区间定量（省时 50~70%、返工≤2 轮），不承诺精准定量</td></tr>
+      <tr><td>⑪ 假设驱动 <span class="star">★</span></td><td>拆假设→找关键假设→验证→坚持/调整/放弃</td><td>H1 付费 / H2 AI 生成质量 / H3 评审通过 / H4 一校覆盖成本。<b>关键假设=H2</b>，最低成本验证=端到端模拟一次"素材→初稿"</td></tr>
+    </table>
+
+    <div class="card" style="margin-top:12px;background:rgba(250,173,20,0.06);border-left:3px solid #FAAD14;">
+      <h3>解放思想主线（重点）</h3>
+      <p>质量年报的底层规律：它是给评审看的<b>证据链文档</b>，不是作文。关联学科经典：审计（证据可追溯）、上市公司披露（结构化）。所以上层突破不是"AI 写得像人写的"，而是"<b>每一个论断都有数据、有来源、有案例可查</b>"——把校验+溯源从附加功能升级为产品灵魂。</p>
+    </div>
+  </section>
+
+  <!-- 五、双三角成果 -->
+  <section id="dual">
+    <div class="sec-title"><span class="num">5</span>双三角模型 · 六角诊断结果 <span class="tag tag-green">已过</span></div>
+    <div class="sec-desc">完整版（Y模型四步 + 双三角六角 + 优美解法 + 最佳实践 + 验证计划）见《Y模型×双三角成果报告》</div>
+    <div class="card">
+      <h3>六角一句话诊断</h3>
+      <table class="tbl" style="margin-top:8px;">
+        <tr><th>角</th><th>结论</th></tr>
+        <tr><td>人类·创造力</td><td>有行业认知+已扽 11 招；缺「显性化成框架」——我能建模，李晴补行业潜规则</td></tr>
+        <tr><td>人类·审美 <span class="tag tag-red">★缺口</span></td><td>缺优质年报样本 + 评审标准 → 无审美基准，H2 没法验（对应 Q3/Q4）</td></tr>
+        <tr><td>人类·体系</td><td>Y 模型在跑；缺假设验证启动 → 我出端到端实验设计，李晴给 1 所真实学校（Q6）</td></tr>
+        <tr><td>AI·场景</td><td>8 步流程已拆；缺 ROI 数据 → 我出框架，李晴补成本基线（Q2）</td></tr>
+        <tr><td>AI·基本功</td><td>能力现成（分类/RAG/成段/比对/多模态）；缺部署形态 → 卡在数据能否上云（Q5）</td></tr>
+        <tr><td>AI·数据 <span class="tag tag-red">★命门</span></td><td>缺风格库种子 + 资产化机制 → 我出四层模型+溯源方案，李晴给优质年报（Q3）</td></tr>
+      </table>
+      <p style="margin-top:8px;font-size:12.5px;color:#6B7280;">三个红缺口（审美基准 / 商业基线 / 数据边界）是当前唯一卡住往下走的点，其余 AI 侧能力基本现成。</p>
+    </div>
+  </section>
+
+  <!-- 六、李晴已答 -->
+  <section id="open">
+    <div class="sec-title"><span class="num">6</span>李晴已答 · 8 问 <span class="tag tag-green">全部回答 ✓</span></div>
+    <div class="sec-desc">答案摘要 + 影响。3 项待补：字数 / 优质年报交付 / 合规方案（李晴已承诺）。</div>
+
+    <div class="todo-item" style="border-left:4px solid #52C41A;">
+      <div style="flex:1;min-width:0;"><b>Q1 卖给谁 ✓</b>：高职/职业本科，教务处名义采购 → 形态=SaaS 合规工具，H1 确认</div>
+      <span class="who li">已答</span>
+    </div>
+    <div class="todo-item" style="border-left:4px solid #52C41A;">
+      <div style="flex:1;min-width:0;"><b>Q2 成本基线 ✓（字数待补）</b>：2 人 × 5-6 工作日/份 · 定价约 5 万 · 120-150 页 → ROI 可算（10-12 人天/份，5万×2-3单覆盖成本）</div>
+      <span class="who li">已答</span>
+    </div>
+    <div class="todo-item" style="border-left:4px solid #52C41A;">
+      <div style="flex:1;min-width:0;"><b>Q3 优质年报 ✓ 已到位</b>：7 份 2025 年高职年报 PDF 已入库（无锡职大/南京工业职大/南京铁道职院/山东商业职院/江苏信息职院/芜湖职大/安徽审计职院）→ 风格库种子</div>
+      <span class="who li">已到位</span>
+    </div>
+    <div class="todo-item" style="border-left:4px solid #52C41A;">
+      <div style="flex:1;min-width:0;"><b>Q4 评审标准 ✓ 已到位</b>：合规表已解析（11 大类检查项：封面封底/声明6细则/目录规范/前言/第三人称/框架/数据来源标注/案例/图片）→ 合规清单种子已入库</div>
+      <span class="who li">已到位</span>
+    </div>
+    <div class="todo-item" style="border-left:4px solid #52C41A;">
+      <div style="flex:1;min-width:0;"><b>Q5 数据合规 ✓</b>：云端处理已是现状，本地化是话术且成本高 → 架构=云端 SaaS，技术架构解除</div>
+      <span class="who li">已答</span>
+    </div>
+    <div class="todo-item" style="border-left:4px solid #52C41A;">
+      <div style="flex:1;min-width:0;"><b>Q6 真实素材 ✓ 已到位</b>：33 项去年真实素材已入库（教务处/发规处财务处/总务处/组织人事处/图文信息中心/继续教育学院/6 学院/马院 + 14 张数据表 + 党建汇报 + 新闻汇总）——<b>H2 验证可启动</b>；素材含同编号表多版本（学生获奖×2、资助×3）= 校验模块现成演示</div>
+      <span class="who li">已到位</span>
+    </div>
+    <div class="todo-item" style="border-left:4px solid #52C41A;">
+      <div style="flex:1;min-width:0;"><b>Q7 校验价值 ✓</b>：每校约 3-5 次不一致（弱校 &lt;10）→ 定位=质量保障组件，非高频卖点</div>
+      <span class="who li">已答</span>
+    </div>
+    <div class="todo-item" style="border-left:4px solid #52C41A;">
+      <div style="flex:1;min-width:0;"><b>Q8 案例边界 ✓</b>：AI 总结约七成、人工改三成；段落限定词好时 AI 到 8-9 成 → 案例 7:3 分工，且经验直接支持 H2 乐观预期</div>
+      <span class="who li">已答</span>
+    </div>
+    <div class="todo-item" style="border-left:4px solid #9BBBF4;">
+      <div style="flex:1;min-width:0;"><b>AI 待命任务</b>：收到去年素材后立即跑「素材→分类→成段→校验→溯源」端到端 demo，对照成稿评分验证 H2</div>
+      <span class="who">AI 待命</span>
+    </div>
+  </section>
+
+  <!-- 七、工程队假设 -->
+  <section id="crew">
+    <div class="sec-title"><span class="num">7</span>工程队假设 · 多 Agent 接力流水线 <span class="tag tag-green">v2 已修正</span></div>
+    <div class="sec-desc">7 个 AI 成员 + 1 个总控人，全是「年报撰写团队」——按功能定位 + 性格设定（去掉了职业隐喻）。完整设定见《工程队角色设定 v2》。</div>
+    <div class="card">
+      <table class="tbl">
+        <tr><th>轮次</th><th>成员</th><th>性格</th><th>输出</th><th>关键假设</th></tr>
+        <tr><td>总控</td><td>李晴 · 终审</td><td>目标感强·有审美</td><td>裁决/终审</td><td>—</td></tr>
+        <tr><td>1</td><td>资料归整员</td><td>严谨·格式洁癖·宁可多收</td><td>素材台账（来源标注）</td><td>溯源源头</td></tr>
+        <tr><td>2</td><td>目录规划师</td><td>结构强迫·先骨架后填肉</td><td>本校目录树</td><td>李晴拍板</td></tr>
+        <tr><td>3</td><td>素材归类员</td><td>手快心细·不擅改材料</td><td>素材→目录归组</td><td>H3 分类准确率</td></tr>
+        <tr><td>4</td><td>数据核对员</td><td>铁面无私·只报差异</td><td>校验报告（冲突标红）</td><td>H4 校验价值</td></tr>
+        <tr><td>5</td><td>案例整理员</td><td>提炼亮点·绝不虚构</td><td>案例库条目</td><td>Q8 七三分工</td></tr>
+        <tr><td>6</td><td>段落撰写员</td><td>文笔稳重·守规矩</td><td>报告初稿（带引用）</td><td><b>H2 生成质量</b></td></tr>
+        <tr><td>7</td><td>终稿质检员</td><td>完美主义·不达标不放行</td><td>待审稿+质检清单</td><td>合规自查</td></tr>
+      </table>
+      <p style="margin-top:8px;font-size:12.5px;color:#6B7280;">设计要点：每轮输出=可验收文档（不过闸不流转）；唯一回流=第4轮冲突交李晴裁决后局部重跑；人必须出现 3 处（目录拍板/冲突裁决/终审签字）。性格→参数：严谨型=低温+高返工阈值，是逐环调参的人格化抓手。</p>
+    </div>
+  </section>
+
+  <!-- 八、雷达图评估体系 -->
+  <section id="radar-sec">
+    <div class="sec-title"><span class="num">8</span>雷达图评估体系 <span class="tag tag-green">已产出</span></div>
+    <div class="sec-desc">把「写得好不好」从主观判断变成可度量维度——整体 1 张 + 每环节 1 张，凹环=调参对象。交互示例见《雷达图评估体系》。</div>
+    <div class="card">
+      <table class="tbl">
+        <tr><th style="width:130px;">图</th><th>维度</th><th style="width:140px;">主要来源</th></tr>
+        <tr><td><b>整体 · 8 维</b></td><td>合规达标 · 结构完整 · 数据可信 · 溯源覆盖 · 证据充分 · 语言规范 · 风格贴合 · 版块均衡</td><td>规则自动 + AI交叉 + 优质样本对照 + 李晴人工</td></tr>
+        <tr><td><b>R1 资料归整</b></td><td>完整率 · 来源标注准确率 · 格式归一率 ·（误删率）</td><td>规则自动</td></tr>
+        <tr><td><b>R2 目录规划</b></td><td>政策覆盖度 · 层级规范 · 意图一致率 · 关键词粒度</td><td>规则 + 人工</td></tr>
+        <tr><td><b>R3 素材归类</b></td><td>归类准确率 ·（未归类率）·（误归率）· 兜底处理率</td><td>规则自动（H3）</td></tr>
+        <tr><td><b>R4 数据核对</b></td><td>冲突检出率 ·（误报率）· 口径提示质量 · 覆盖范围</td><td>规则自动（H4）</td></tr>
+        <tr><td><b>R5 案例整理</b></td><td>真实性 · 结构完整度 · 数量达标率 · 章节契合度</td><td>AI 交叉</td></tr>
+        <tr><td><b>R6 段落撰写</b></td><td>证据支撑度 · 风格贴合度 · 语言规范 ·（返工轮次）</td><td>AI交叉 + 样本对照（H2）</td></tr>
+        <tr><td><b>R7 终稿质检</b></td><td>格式合规 · 引用完整 · 术语一致 · 版块均衡</td><td>规则自动</td></tr>
+      </table>
+      <p style="margin-top:8px;font-size:12.5px;color:#6B7280;">评分四路交叉：规则自动 / AI 多模型交叉 / 对照 7 份优质年报 / 李晴人工。每单跑完自动出图，凹环定位到环节调参，跨单跨校对比看进步——雷达图即团队能力成长图。</p>
+    </div>
+  </section>
+
+  <!-- 九、端到端演示 -->
+  <section id="e2e">
+    <div class="sec-title"><span class="num">9</span>端到端演示 <span class="tag tag-red">已跑通 · 待人工复核</span></div>
+    <div class="sec-desc">基于真实素材（阜阳幼儿师专 33 项）跑通全流程，详见《端到端演示报告》。</div>
+    <div class="card">
+      <table class="tbl">
+        <tr><th style="width:130px;">结论</th><th>说明</th></tr>
+        <tr><td><b>H2 生成质量</b></td><td>初步乐观：真实素材能产出规范、可溯源、可改的段落（与李晴 8-9 成经验一致），待对照优质年报+李晴人工评分定论</td></tr>
+        <tr><td><b>H4 校验价值</b></td><td><span class="hl">实证：抓到 3 处真实数据冲突</span>（学生资助三版本：校内资助 133.4723 vs 133.5515 万 / 1434 vs 1438 人 / 34.83% vs 32.53%）</td></tr>
+        <tr><td><b>R3.5 缺口检查</b></td><td><span class="hl">实证：归类后扫出 1 红 8 黄</span>——国际合作章素材 0 条（红），前言/办学规模/教材/实训/帮扶等 8 节点偏少（黄）→ 反馈李晴找学校补料</td></tr>
+        <tr><td><b>待李晴</b></td><td>① 裁决资助冲突最终版并替换素材；② 用质量清单给 4 段样稿打 1-5 分（雷达图权威值）；③ 补艺术体育学院 .doc；④ 按缺口报告补国际合作等章节素材</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <div class="foot">高职质量年报平台 · 共创看板 · 由 AI 持续维护更新</div>
+</div>
+</body>
+</html>

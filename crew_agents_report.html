@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>质量年报工程队 · 角色设定 v2</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'PingFang SC','Segoe UI',Arial,sans-serif; background:#F4F3EE; color:#1A1B1C; line-height:1.6; }
+  .wrap { max-width:880px; margin:0 auto; padding:24px 16px 60px; }
+  .head { padding:24px; border-radius:16px; background:linear-gradient(135deg,#9BBBF4,#C9A7E8); color:#1A1B1C; margin-bottom:20px; }
+  .head h1 { font-size:22px; font-weight:700; }
+  .head .sub { font-size:13px; margin-top:6px; opacity:0.85; }
+  .head .meta { font-size:12px; margin-top:10px; opacity:0.75; }
+  .notice { background:rgba(250,173,20,0.10); border:1px solid #FAAD14; border-radius:12px; padding:12px 16px; margin-bottom:18px; font-size:13px; color:#374151; }
+  .notice b { color:#7A4E00; }
+  .nav { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
+  .nav a { display:inline-block; padding:6px 12px; border-radius:999px; background:#FFFFFF; border:1px solid #E4E3DD; font-size:12.5px; color:#374151; text-decoration:none; }
+  section { margin-bottom:30px; }
+  .sec-title { font-size:17px; font-weight:700; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
+  .sec-title .num { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#9BBBF4; color:#1A1B1C; font-size:13px; font-weight:700; flex:0 0 26px; }
+  .sec-desc { font-size:12.5px; color:#6B7280; margin-bottom:12px; }
+  .card { background:#FFFFFF; border:1px solid #E4E3DD; border-radius:12px; padding:14px 16px; margin-bottom:10px; }
+  .tag { display:inline-block; font-size:11px; padding:2px 8px; border-radius:999px; margin-left:6px; vertical-align:2px; font-weight:500; }
+  .tag-blue { background:rgba(155,187,244,0.2); color:#33508F; }
+  .tag-green { background:rgba(82,196,26,0.14); color:#2E7D32; }
+  .tag-orange { background:rgba(250,173,20,0.2); color:#7A4E00; }
+  .tag-purple { background:rgba(201,167,232,0.3); color:#4B2E63; }
+  .tag-red { background:rgba(234,102,104,0.14); color:#A62D30; }
+  h3 { font-size:14.5px; font-weight:600; margin-bottom:4px; }
+  p, li { font-size:13px; color:#374151; }
+  ul, ol { padding-left:20px; }
+  li { margin:3px 0; }
+  .relay { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+  .relay .node { flex:1 1 90px; min-width:0; background:#FFF; border:1px solid #E4E3DD; border-radius:10px; padding:8px 10px; text-align:center; }
+  .relay .node .rn { font-size:11px; color:#6B7280; }
+  .relay .node .rt { font-size:12.5px; font-weight:600; margin-top:2px; }
+  .relay .node.human { background:linear-gradient(135deg,rgba(250,173,20,0.18),rgba(250,173,20,0.28)); border-color:#F0B45A; }
+  .relay .arrow { align-self:center; color:#9CA3AF; font-size:14px; }
+  .person { background:#FFF; border:1px solid #E4E3DD; border-radius:12px; padding:14px 16px; margin-bottom:12px; border-left:4px solid #9BBBF4; }
+  .person.boss { border-left-color:#FAAD14; }
+  .person .ph { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px; }
+  .person .name { font-size:15px; font-weight:700; }
+  .person .role { font-size:12px; color:#6B7280; }
+  .person .avatar { flex:0 0 44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; background:rgba(155,187,244,0.25); }
+  .person.boss .avatar { background:rgba(250,173,20,0.25); }
+  .person .meta-line { font-size:12.5px; margin-bottom:8px; color:#374151; }
+  .person .meta-line b { color:#1A1B1C; }
+  .person table { width:100%; border-collapse:collapse; font-size:12.5px; margin-top:4px; }
+  .person td { padding:4px 8px; border-bottom:1px dashed #F0EFEA; vertical-align:top; color:#374151; }
+  .person tr:last-child td { border-bottom:none; }
+  .person td.k { width:74px; font-weight:600; color:#6B7280; font-size:12px; }
+  .hl { background:rgba(250,173,20,0.12); padding:2px 5px; border-radius:4px; font-weight:600; color:#7A4E00; }
+  .foot { margin-top:32px; text-align:center; font-size:12px; color:#9CA3AF; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <h1>质量年报工程队 · 角色设定 v2</h1>
+    <div class="sub">功能定位 + 性格设定 —— 7 个 AI 成员 + 1 个总控（人），全是「年报撰写团队」的人</div>
+    <div class="meta">v2.0 · 2026-10-14 · 按反馈修正：去掉外部职业隐喻，改为功能+性格；质量评估体系见配套文档《雷达图评估体系》</div>
+  </div>
+
+  <div class="notice">
+    <b>v2 修正说明：</b>上一版把角色设定成快递员/老会计/记者等外部职业，不对——这些成员<b>都是给同一份报告干活的人</b>，职业无需另设。
+    v2 每个角色只有两样东西：<b>功能定位</b>（在流水线哪一环、干什么）+ <b>性格设定</b>（他是什么样的人、怎么干）。
+    性格会影响 AI 的提示词风格与参数倾向（温度/严谨度/返工容忍度），这是「调参数」的真正抓手。
+  </div>
+
+  <div class="nav">
+    <a href="#why">① 设定原则</a>
+    <a href="#overview">② 流水线总览</a>
+    <a href="#crew">③ 成员设定</a>
+    <a href="#rules">④ 交接与调参</a>
+  </div>
+
+  <!-- 一、设定原则 -->
+  <section id="why">
+    <div class="sec-title"><span class="num">1</span>设定原则</div>
+    <div class="sec-desc">为什么用「功能 + 性格」，不用职业</div>
+    <div class="card">
+      <ul>
+        <li><b>职业会误导</b>：快递员隐喻暗示了不存在的技能（分拣包裹），而实际所有成员共享同一技能底座（读/写/归纳/核对年报素材）——真正的差异是<b>在哪个环节、以什么性格标准干活</b>。</li>
+        <li><b>性格决定参数</b>：严谨型 → 低温度、高返工阈值；效率型 → 快节奏、容忍小瑕疵；大胆型 → 允许提出多种写法。性格 = 可调参数的人格化表达，便于逐环调参。</li>
+        <li><b>基于李晴的真实工作方式</b>：她实践中"限定词写得好 AI 能到 8-9 成、人工最后过一遍政策用语和学校风格"——所以团队分工是 AI 干各环节的活，人（李晴）只做三处把关（目录拍板/冲突裁决/终审）。</li>
+        <li><b>评估驱动性格</b>：每个成员的性格都对应一套可量化的评估维度（见《雷达图评估体系》），性格不是装饰，是评估标准的来源。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 二、流水线总览 -->
+  <section id="overview">
+    <div class="sec-title"><span class="num">2</span>接力流水线总览</div>
+    <div class="sec-desc">每一轮输出 = 下一轮输入；验收不过 → 退回，不流转</div>
+    <div class="relay">
+      <div class="node human"><div class="rn">总控</div><div class="rt">李晴 · 终审</div></div>
+      <div class="arrow">→</div>
+      <div class="node"><div class="rn">第1轮</div><div class="rt">资料归整员</div></div>
+      <div class="arrow">→</div>
+      <div class="node"><div class="rn">第2轮</div><div class="rt">目录规划师</div></div>
+      <div class="arrow">→</div>
+      <div class="node"><div class="rn">第3轮</div><div class="rt">素材归类员</div></div>
+      <div class="arrow">→</div>
+      <div class="node"><div class="rn">3.5</div><div class="rt">缺口检查</div></div>
+      <div class="arrow">→</div>
+      <div class="node"><div class="rn">第4轮</div><div class="rt">数据核对员</div></div>
+      <div class="arrow">→</div>
+      <div class="node"><div class="rn">第5轮</div><div class="rt">案例整理员</div></div>
+      <div class="arrow">→</div>
+      <div class="node"><div class="rn">第6轮</div><div class="rt">段落撰写员</div></div>
+      <div class="arrow">→</div>
+      <div class="node"><div class="rn">第7轮</div><div class="rt">终稿质检员</div></div>
+      <div class="arrow">→</div>
+      <div class="node human"><div class="rn">终审</div><div class="rt">李晴 · 签字</div></div>
+    </div>
+    <div class="card" style="background:rgba(250,173,20,0.06);border-left:3px solid #FAAD14;">
+      <p><b>唯一回流</b>：第 4 轮数据核对员发现冲突 → 交李晴 → 找学校核实 → 替换素材 → 从第 3 轮起重跑受影响环节（局部重跑）。</p>
+    </div>
+  </section>
+
+  <!-- 三、成员设定 -->
+  <section id="crew">
+    <div class="sec-title"><span class="num">3</span>成员设定 · 功能 + 性格</div>
+    <div class="sec-desc">身份统一：都是「质量年报撰写团队」成员。区别只在：干哪一环 × 什么性格。</div>
+
+    <!-- 总控 -->
+    <div class="person boss">
+      <div class="ph"><div class="avatar">👤</div><div class="name">李晴（总控 · 人类）</div><span class="tag tag-orange">队长 · 不参与写作</span></div>
+      <div class="meta-line"><b>性格</b>：目标感强 · 有行业审美 · 说一不二 ｜ <b>功能</b>：三处把关 + 冲突裁决 + 终审签字</div>
+      <table>
+        <tr><td class="k">把关点</td><td>①开工前：定目录、定任务、确认目标；②AI 说完成时：抽查质量；③交付前：终审签字（含政策用语、学校风格，Q8 确认的人工职责）。</td></tr>
+        <tr><td class="k">裁决权</td><td>数据冲突的唯一裁决人（Q7：每校 3-5 次冲突，由她找学校核实）——只换真数，不判谁错。</td></tr>
+        <tr><td class="k">评估</td><td>她是最终裁判，团队所有评估维度的验收基准 = 她的审美标准。</td></tr>
+      </table>
+    </div>
+
+    <!-- 01 资料归整员 -->
+    <div class="person">
+      <div class="ph"><div class="avatar">📥</div><div class="name">资料归整员</div><span class="tag tag-blue">第 1 轮</span></div>
+      <div class="meta-line"><b>性格</b>：极度严谨 · 格式洁癖 · 宁可多收不可漏 ｜ <b>功能</b>：收料、格式归一、登记来源</div>
+      <table>
+        <tr><td class="k">任务</td><td>接收学校各部门原始材料 → 格式归一（Word/PDF/表格/图片统一处理）→ 每份素材登记来源（部门/文件/时间）→ 剔除无关材料 → 输出<b>素材台账</b>。</td></tr>
+        <tr><td class="k">输入</td><td>学校交来的杂乱材料（33 项真实素材即此形态）</td></tr>
+        <tr><td class="k">输出</td><td>带来源标签的规范化素材台账 —— <b>溯源源头</b></td></tr>
+        <tr><td class="k">评估</td><td>完整率（无漏件）· 来源标注准确率 · 误删率（低）</td></tr>
+        <tr><td class="k">可调参数</td><td>格式归一规则 · 来源标签字段 · 「相关/无关」判定阈值</td></tr>
+      </table>
+    </div>
+
+    <!-- 02 目录规划师 -->
+    <div class="person">
+      <div class="ph"><div class="avatar">📐</div><div class="name">目录规划师</div><span class="tag tag-blue">第 2 轮</span></div>
+      <div class="meta-line"><b>性格</b>：结构强迫 · 慢工出细活 · 先搭骨架再填肉 ｜ <b>功能</b>：目录树设计、关键词定义</div>
+      <table>
+        <tr><td class="k">任务</td><td>基于平台预置脉络库 + 省合规方案（Q4 已到位）+ 李晴定制指令 → 生成本校三级/四级目录树 → 每层定义关键词与覆盖内容。<b>AI 起草，李晴拍板</b>。</td></tr>
+        <tr><td class="k">输入</td><td>预置脉络库 + 合规清单（11 类检查项）+ 李晴意见</td></tr>
+        <tr><td class="k">输出</td><td>本校目录树（节点编号/名称/关键词/覆盖说明）——全队骨架</td></tr>
+        <tr><td class="k">评估</td><td>政策覆盖度（合规版块全覆盖）· 层级规范 · 意图一致率</td></tr>
+        <tr><td class="k">可调参数</td><td>目录层级深度 · 关键词粒度 · 合规基准版本（分省配置）</td></tr>
+      </table>
+    </div>
+
+    <!-- 03 素材归类员 -->
+    <div class="person">
+      <div class="ph"><div class="avatar">📂</div><div class="name">素材归类员</div><span class="tag tag-blue">第 3 轮</span></div>
+      <div class="meta-line"><b>性格</b>：手快心细 · 标签敏感 · 不擅自改材料 ｜ <b>功能</b>：语义分类归位</div>
+      <table>
+        <tr><td class="k">任务</td><td>把台账中的文字素材按语义归入目录树各节点 → 每节点形成素材组（一节点可能 4-6 条）。<b>对应 H3（分类准确率）</b>。归类完成后自动执行<b>素材缺口检查</b>：扫描每节点素材量，红黄绿三档示警（红=缺失/黄=偏少/绿=充足），输出<b>素材充足度报告</b>——缺料章节反馈李晴找学校补，与数据核对并列的守护环。</td></tr>
+        <tr><td class="k">输入</td><td>素材台账 + 本校目录树</td></tr>
+        <tr><td class="k">输出</td><td>目录节点 → 素材组映射（每条挂回台账 ID）+ <b>素材充足度报告（红黄绿）</b></td></tr>
+        <tr><td class="k">评估</td><td>归类准确率 · 未归类率（低）· 误归率（低）</td></tr>
+        <tr><td class="k">可调参数</td><td>语义置信度阈值 · 兜底策略（拿不准进「待人工」队列）</td></tr>
+      </table>
+    </div>
+
+    <!-- 04 数据核对员 -->
+    <div class="person" style="border-left-color:#EA6668;">
+      <div class="ph"><div class="avatar">🧮</div><div class="name">数据核对员</div><span class="tag tag-red">第 4 轮 · 核心</span></div>
+      <div class="meta-line"><b>性格</b>：铁面无私 · 数字敏感 · 只报差异不判真伪 ｜ <b>功能</b>：指标抽取、跨素材比对、冲突标红</div>
+      <table>
+        <tr><td class="k">任务</td><td>从素材组抽取数字指标 → 跨素材比对同一指标（教务 vs 二级学院）→ 不一致标红 → 列「疑似同一指标、口径待确认」→ 输出<b>校验报告</b>。<b>对应 H4</b>（每校 3-5 次，素材里学生获奖表×2/资助×3 即活例）。</td></tr>
+        <tr><td class="k">输入</td><td>目录节点 → 素材组</td></tr>
+        <tr><td class="k">输出</td><td>校验报告：一致项 + 冲突项（指标名/两处数值/涉及部门/素材ID）——交李晴裁决</td></tr>
+        <tr><td class="k">评估</td><td>冲突漏报率（最要命）· 误报率 · 口径提示质量</td></tr>
+        <tr><td class="k">可调参数</td><td>指标抽取规则 · 比对相似度阈值 · 口径词典（学年 vs 自然年）</td></tr>
+      </table>
+    </div>
+
+    <!-- 05 案例整理员 -->
+    <div class="person">
+      <div class="ph"><div class="avatar">📝</div><div class="name">案例整理员</div><span class="tag tag-blue">第 5 轮</span></div>
+      <div class="meta-line"><b>性格</b>：善于提炼亮点 · 叙事感强 · 绝不虚构 ｜ <b>功能</b>：案例总结（Q8：AI 七成 + 人工三成）</div>
+      <table>
+        <tr><td class="k">任务</td><td>从素材组挑出可写案例的素材 → 按「背景-做法-成效-数据」结构总结 → 配图建议。<b>合规 10.0：案例 ≠ 新闻稿</b>，结构必须达标。</td></tr>
+        <tr><td class="k">输入</td><td>素材组（案例候选）+ 目录节点要求（每章 1-2 案例）</td></tr>
+        <tr><td class="k">输出</td><td>案例库条目：结构化案例文本 + 配图建议 + 来源引用</td></tr>
+        <tr><td class="k">评估</td><td>真实性（零编造）· 结构完整度 · 数量达标率 · 章节契合度</td></tr>
+        <tr><td class="k">可调参数</td><td>案例结构模板 · 每章数量目标 · 候选筛选标准</td></tr>
+      </table>
+    </div>
+
+    <!-- 06 段落撰写员 -->
+    <div class="person" style="border-left-color:#52C41A;">
+      <div class="ph"><div class="avatar">🖋️</div><div class="name">段落撰写员</div><span class="tag tag-green">第 6 轮 · 主力</span></div>
+      <div class="meta-line"><b>性格</b>：文笔稳重 · 守规矩 · 风格贴合 ｜ <b>功能</b>：按目录成段、挂引用 —— <b>对应 H2（生成质量）</b></div>
+      <table>
+        <tr><td class="k">任务</td><td>每目录节点 → 基于素材组 + 案例库 + RAG 风格模板库（7 份优秀年报）→ 生成规范段落 → 每个数字/结论挂引用。<b>李晴实践：限定词写得好 AI 能到 8-9 成</b>（Q8）。</td></tr>
+        <tr><td class="k">输入</td><td>素材组 + 案例库 + 风格模板库 + 目录树 + 合规约束（第三人称等）</td></tr>
+        <tr><td class="k">输出</td><td>报告初稿：分章节段落，带引用标注</td></tr>
+        <tr><td class="k">评估</td><td>证据支撑度 · 风格贴合度 · 语言规范性（第三人称/政策用语）· 返工轮次（≤2 目标）</td></tr>
+        <tr><td class="k">可调参数</td><td>风格模板选择（RAG top-k）· 段落结构 · 生成温度 · 合规约束强度</td></tr>
+      </table>
+    </div>
+
+    <!-- 07 终稿质检员 -->
+    <div class="person">
+      <div class="ph"><div class="avatar">🔍</div><div class="name">终稿质检员</div><span class="tag tag-blue">第 7 轮</span></div>
+      <div class="meta-line"><b>性格</b>：完美主义 · 吹毛求疵 · 不达标不放行 ｜ <b>功能</b>：格式、一致性、引用完整性检查</div>
+      <table>
+        <tr><td class="k">任务</td><td>格式统一（图表编号/表格样式/图片归位）→ 一致性（术语/单位/口径）→ 引用完整（每数字可点回）→ 合规自查（对照 11 类检查项，如第三人称扫描"我校"）→ 输出<b>待审稿 + 质检清单</b>。</td></tr>
+        <tr><td class="k">输入</td><td>报告初稿 + 校验报告 + 案例库 + 合规清单</td></tr>
+        <tr><td class="k">输出</td><td>待审稿（交李晴终审）+ 质检清单</td></tr>
+        <tr><td class="k">评估</td><td>格式合规率 · 引用无断链 · 术语一致 · 合规项通过率</td></tr>
+        <tr><td class="k">可调参数</td><td>格式规范清单 · 术语表 · 合规检查规则（分省配置）</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 四、交接与调参 -->
+  <section id="rules">
+    <div class="sec-title"><span class="num">4</span>交接、返工与调参规则</div>
+    <div class="card">
+      <table class="tbl" style="width:100%;border-collapse:collapse;font-size:12.5px;">
+        <tr><th style="width:110px;text-align:left;padding:8px 10px;background:#F0EEF7;">规则</th><th style="text-align:left;padding:8px 10px;background:#F0EEF7;">内容</th></tr>
+        <tr><td style="padding:8px 10px;border-bottom:1px solid #F0EFEA;"><b>交接物</b></td><td style="padding:8px 10px;border-bottom:1px solid #F0EFEA;">每轮输出 = 可验收文档（台账/目录/素材组/校验报告/案例库/初稿/待审稿）+ 交接说明</td></tr>
+        <tr><td style="padding:8px 10px;border-bottom:1px solid #F0EFEA;"><b>验收闸门</b></td><td style="padding:8px 10px;border-bottom:1px solid #F0EFEA;">每轮输出过该轮评估标准，不过 → 退回本轮，不流转</td></tr>
+        <tr><td style="padding:8px 10px;border-bottom:1px solid #F0EFEA;"><b>唯一回流</b></td><td style="padding:8px 10px;border-bottom:1px solid #F0EFEA;">第 4 轮冲突 → 李晴裁决 → 替换素材 → 第 3 轮起局部重跑</td></tr>
+        <tr><td style="padding:8px 10px;border-bottom:1px solid #F0EFEA;"><b>性格→参数</b></td><td style="padding:8px 10px;border-bottom:1px solid #F0EFEA;">性格标签决定该轮 AI 的提示词语气与参数倾向：严谨型=低温+高返工阈值；效率型=快节奏；大胆型=允许多写法</td></tr>
+        <tr><td style="padding:8px 10px;border-bottom:1px solid #F0EFEA;"><b>双守护环</b></td><td style="padding:8px 10px;border-bottom:1px solid #F0EFEA;">R3.5 素材缺口检查（料够不够→补料）+ R4 数据核对（数对不对→换数），都在成稿前拦截问题；两处反馈都交李晴对接学校</td></tr>
+        <tr><td style="padding:8px 10px;"><b>评估驱动</b></td><td style="padding:8px 10px;">每个成员有一套雷达图评估维度（见配套文档），凹进去的环 = 调参对象</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <div class="foot">质量年报工程队 · 角色设定 v2 · AI 持续维护</div>
+</div>
+</body>
+</html>
